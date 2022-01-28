@@ -1,19 +1,20 @@
 version: '3.8'
+
 services:
-  db:
-    image: postgres:14.1-alpine
-    container_name: "postgres"
+  mongo:
+    image: mongo
+    container_name: mongo
     restart: always
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=mongdb
     ports:
-      - '5432:5432'
-    volumes: 
-      - C:\postgre\data:/var/lib/postgresql/data
+      - '27017:27017'
+    volumes:
+      - C:\mongodb:/data/db
     networks:
-      - postgres
+      - mongo-network
 
 networks:
-  postgres:
+  mongo-network:
     driver: bridge
