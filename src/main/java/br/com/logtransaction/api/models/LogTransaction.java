@@ -1,24 +1,22 @@
 package br.com.logtransaction.api.models;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.PositiveOrZero;
-import javax.validation.constraints.Size;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
-
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.annotation.Id;
 import lombok.Data;
 
 @Data
 @Document
-public class LogTransaction {
+public class LogTransaction implements Serializable{
 
+    private static final long serialVersionUID = -7156526077883281623L;
+    
     @Id
     private String Id;
     

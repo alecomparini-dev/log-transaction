@@ -1,5 +1,4 @@
 package br.com.logtransaction.api.resources;
-import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.List;
 

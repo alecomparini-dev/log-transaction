@@ -1,12 +1,10 @@
 package br.com.logtransaction.api.services.impl;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-import org.yaml.snakeyaml.util.EnumUtils;
-
 import br.com.logtransaction.api.enums.Brand;
 import br.com.logtransaction.api.models.LogTransaction;
 import br.com.logtransaction.api.repositories.LogTransactionRepository;
@@ -21,10 +19,10 @@ public class LogTransactionServiceImpl implements LogTransactionService {
     private LogTransactionRepository logTransactionRepository;
     
     @Override
+    @Cacheable(value = "clientCache")
     public LogTransaction save(LogTransaction logTransaction) {
         return this.logTransactionRepository.save(validateRequest(logTransaction));
     }
-
 
     private LogTransaction validateRequest(LogTransaction logTransaction) {
         List<String> errors = new ArrayList<>();
@@ -32,7 +30,6 @@ public class LogTransactionServiceImpl implements LogTransactionService {
         validateClient(logTransaction, errors);
         if(!errors.isEmpty())
             throw new BadRequestException(errors);
-
         return logTransaction;
     }
 
