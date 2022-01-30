@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/client")
 public class ClientController {
@@ -14,15 +16,15 @@ public class ClientController {
     @Autowired
     private ClientService clientService;
 
-    @GetMapping("/{id}")
-    public Client findById(@PathVariable  String id) {
-        return clientService.findById(id);
+    @GetMapping
+    public Map<String,Client> findAll() {
+        return clientService.findAll();
     }
 
     @PostMapping
-    public void save(@RequestBody Client user) {
-        clientService.save(user);
-        ResponseEntity.status(HttpStatus.CREATED);
+    public ResponseEntity<?> save(@RequestBody Client client) {
+        clientService.save(client);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
 }

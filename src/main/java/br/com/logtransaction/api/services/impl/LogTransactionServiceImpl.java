@@ -2,6 +2,9 @@ package br.com.logtransaction.api.services.impl;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import br.com.logtransaction.api.models.Client;
+import br.com.logtransaction.api.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -17,11 +20,25 @@ public class LogTransactionServiceImpl implements LogTransactionService {
 
     @Autowired
     private LogTransactionRepository logTransactionRepository;
-    
+
+    @Autowired
+    private ClientService clientService;
+
     @Override
-    @Cacheable(value = "clientCache")
     public LogTransaction save(LogTransaction logTransaction) {
-        return this.logTransactionRepository.save(validateRequest(logTransaction));
+
+        logTransaction = this.logTransactionRepository.save(validateRequest(logTransaction));
+        clientService.save(
+                Client.builder()
+                        .Id(logTransaction.getId())
+                        .brand(logTransaction.getBrand())
+                        .client(logTransaction.getClient())
+                        .amount(logTransaction.getAmount().doubleValue())
+                        .transactionDate(logTransaction.getTransactionDate().toString())
+                        .build()
+        );
+
+        return logTransaction;
     }
 
     private LogTransaction validateRequest(LogTransaction logTransaction) {
