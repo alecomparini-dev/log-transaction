@@ -1,4 +1,5 @@
 package br.com.logtransaction.api.services.impl;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -26,19 +27,23 @@ public class LogTransactionServiceImpl implements LogTransactionService {
 
     @Override
     public LogTransaction save(LogTransaction logTransaction) {
-
+        logTransaction.setCreateAt(LocalDateTime.now());
         logTransaction = this.logTransactionRepository.save(validateRequest(logTransaction));
+        saveRedis(logTransaction);
+        return logTransaction;
+    }
+
+    private void saveRedis(LogTransaction logTransaction) {
         clientService.save(
-                Client.builder()
-                        .Id(logTransaction.getId())
-                        .brand(logTransaction.getBrand())
-                        .client(logTransaction.getClient())
-                        .amount(logTransaction.getAmount().doubleValue())
-                        .transactionDate(logTransaction.getTransactionDate().toString())
-                        .build()
+            Client.builder()
+                .Id(logTransaction.getId())
+                .brand(logTransaction.getBrand())
+                .client(logTransaction.getClient())
+                .amount(logTransaction.getAmount().doubleValue())
+                .transactionDate(logTransaction.getTransactionDate().toString())
+                .build()
         );
 
-        return logTransaction;
     }
 
     private LogTransaction validateRequest(LogTransaction logTransaction) {
