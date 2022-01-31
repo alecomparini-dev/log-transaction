@@ -1,5 +1,6 @@
 package br.com.logtransaction.api.models;
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import lombok.Builder;
 import lombok.Data;
@@ -12,6 +13,6 @@ public class Client implements Serializable {
     private String Id;
     private String brand;
     private String client;
-    private Double amount;
+    private BigDecimal amount;
     private String transactionDate;
 }

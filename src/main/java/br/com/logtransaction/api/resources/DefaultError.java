@@ -15,5 +15,4 @@ public class DefaultError {
     private List<String> message;
     private String path;
 
-    
 }

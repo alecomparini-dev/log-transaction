@@ -3,4 +3,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import br.com.logtransaction.api.models.LogTransaction;
 
 
-public interface LogTransactionRepository extends MongoRepository<LogTransaction,String> {}
+public interface LogTransactionRepository extends MongoRepository<LogTransaction,String> {
+
+}

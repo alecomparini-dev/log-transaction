@@ -29,21 +29,7 @@ public class LogTransactionServiceImpl implements LogTransactionService {
     public LogTransaction save(LogTransaction logTransaction) {
         logTransaction.setCreateAt(LocalDateTime.now());
         logTransaction = this.logTransactionRepository.save(validateRequest(logTransaction));
-        saveRedis(logTransaction);
         return logTransaction;
-    }
-
-    private void saveRedis(LogTransaction logTransaction) {
-        clientService.save(
-            Client.builder()
-                .Id(logTransaction.getId())
-                .brand(logTransaction.getBrand())
-                .client(logTransaction.getClient())
-                .amount(logTransaction.getAmount().doubleValue())
-                .transactionDate(logTransaction.getTransactionDate().toString())
-                .build()
-        );
-
     }
 
     private LogTransaction validateRequest(LogTransaction logTransaction) {
