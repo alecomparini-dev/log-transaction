@@ -1,7 +1,6 @@
 package br.com.logtransaction.api.models;
 import java.io.Serializable;
 import java.math.BigDecimal;
-
 import lombok.Builder;
 import lombok.Data;
 

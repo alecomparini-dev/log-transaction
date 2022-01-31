@@ -43,7 +43,6 @@ public class LogTransaction implements Serializable{
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS")
     @Indexed(direction = IndexDirection.ASCENDING)
     private LocalDateTime transactionDate;
-
     private LocalDateTime createAt;
     
 }

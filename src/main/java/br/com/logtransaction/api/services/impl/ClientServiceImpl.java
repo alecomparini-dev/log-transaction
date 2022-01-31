@@ -3,8 +3,6 @@ import br.com.logtransaction.api.repositories.ClientRepository;
 import br.com.logtransaction.api.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.time.LocalDateTime;
-
 
 @Service
 public class ClientServiceImpl implements ClientService {

@@ -1,5 +1,4 @@
 package br.com.logtransaction.api.resources;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +43,5 @@ public class DefaulErrorExceptionHandler {
                    
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(defaultError);
     }
-
 
 }
