@@ -1,30 +1,47 @@
 package br.com.logtransaction.api.repositories;
-import br.com.logtransaction.api.models.Client;
-import org.springframework.data.redis.core.HashOperations;
-import org.springframework.data.redis.core.RedisTemplate;
+import java.time.LocalDateTime;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
-import java.util.Map;
+import br.com.logtransaction.api.models.LogTransaction;
+import br.com.logtransaction.api.models.TopExpensesByBrand;
+
 
 @Repository
-public class ClientRepository {
+public class ClientRepository{ 
 
-    private RedisTemplate<String, Client> redisTemplate;
-    private HashOperations hashOperations;
+    private final MongoTemplate mongoTemplate;
 
-    public ClientRepository(RedisTemplate<String, Client> redisTemplate) {
-        this.redisTemplate = redisTemplate;
-        hashOperations = redisTemplate.opsForHash();
+    @Autowired
+    public ClientRepository(MongoTemplate mongoTemplate) {
+        this.mongoTemplate = mongoTemplate;
     }
 
-    public Map<String, Client> findAll() {
-        Map<String,Client> list = hashOperations.entries("CLIENT");
-        System.out.println(list.size());
-        return list;
+    public List<TopExpensesByBrand> getTopExpesesByBrand(LocalDateTime startDate, LocalDateTime limitDate){
+        
+
+        Query query = new Query();
+        query.addCriteria(Criteria.where("brand").is("visa"));
+        
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+        System.out.println(mongoTemplate.findOne(query, LogTransaction.class));
+            
+
+        return null;
     }
 
-    public void save(Client client) {
-        hashOperations.put("CLIENT", client.getId(), client);
-    }
 
 }
+
+
+
+// public interface ClientRepository extends MongoRepository<TopExpensesByBrand, String>{
+    // @Aggregation(pipeline = {
+    //     "{'$match': { 'transactionDate': {$gte: '?0' , $lte: ?1 }}}"
+    // })
+    // List<TopExpensesByBrand> getTopExpesesByBrand(LocalDateTime startDate, LocalDateTime limitDate);

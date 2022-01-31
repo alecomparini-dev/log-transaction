@@ -2,6 +2,7 @@ package br.com.logtransaction.api.controllers;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,6 +20,7 @@ public class LogTransactionController {
     private LogTransactionService logTransactionService;
 
     @PostMapping
+    @Secured("USER")
     public ResponseEntity<LogTransaction> save(@Valid @RequestBody LogTransaction logTransaction, BindingResult result) {
         
         if (result.hasErrors()) 

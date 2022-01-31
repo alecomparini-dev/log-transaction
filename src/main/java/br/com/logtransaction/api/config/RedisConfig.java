@@ -1,4 +1,4 @@
-package br.com.logtransaction;
+package br.com.logtransaction.api.config;
 import br.com.logtransaction.api.models.Client;
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

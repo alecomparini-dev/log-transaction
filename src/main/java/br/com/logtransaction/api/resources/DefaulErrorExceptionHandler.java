@@ -2,6 +2,7 @@ package br.com.logtransaction.api.resources;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +17,7 @@ public class DefaulErrorExceptionHandler {
     
     @ExceptionHandler(CustomerNameException.class)
     public ResponseEntity<DefaultError> customerName(CustomerNameException ex, HttpServletRequest httpServletRequest) {
-        var messages = new ArrayList<String>();
+        List<String> messages = new ArrayList<String>();
         messages.add(ex.getMessage());
         DefaultError defaultError =  DefaultError.builder()
             .timestamp(LocalDateTime.now())
