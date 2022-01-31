@@ -34,7 +34,6 @@ public class LogTransactionServiceImpl implements LogTransactionService {
         List<String> errors = new ArrayList<>();
         validateBrand(logTransaction, errors);
         validateClient(logTransaction, errors);
-        validateAmount(logTransaction, errors);
         if(!errors.isEmpty())
             throw new BadRequestException(errors);
         return logTransaction;
@@ -49,11 +48,6 @@ public class LogTransactionServiceImpl implements LogTransactionService {
         if(!Arrays.stream(Brand.values()).anyMatch(
             e -> e.name().equalsIgnoreCase(logTransaction.getBrand())))
            errors.add("Field 'brand' not valid. Allowed values: " + Brand.getAllowedValues());
-    }
-
-    private void validateAmount(LogTransaction logTransaction, List<String> errors) {
-        if( logTransaction.getAmount().compareTo(BigDecimal.ZERO) < 0 )
-            errors.add("Field amount must be positive");
     }
 
 }

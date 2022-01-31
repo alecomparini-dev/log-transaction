@@ -25,7 +25,6 @@ public class LogTransaction implements Serializable{
     
     @NotNull(message = "Field brand is required")
     @NotEmpty(message = "Field brand is not empty")
-    @Indexed(direction = IndexDirection.ASCENDING)
     private String brand;
     
     @NotNull(message = "Field client is required")
@@ -33,12 +32,12 @@ public class LogTransaction implements Serializable{
     private String client;
     
     @NotNull(message = "Field amount is required")
-    @PositiveOrZero(message = "")
+    @PositiveOrZero(message = "Field amount must be positive")
     private BigDecimal amount;
 
-    @NotNull(message = "Field transactionDate is required")
     @PastOrPresent(message = "Field transactionDate not valid")
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS")
+    @NotNull(message = "Field transactionDate is required")
     private LocalDateTime transactionDate;
     private LocalDateTime createAt;
     
