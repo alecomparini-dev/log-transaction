@@ -1,17 +1,15 @@
 package br.com.logtransaction.api.services.impl;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import br.com.logtransaction.api.services.ClientService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import br.com.logtransaction.api.enums.Brand;
 import br.com.logtransaction.api.models.LogTransaction;
 import br.com.logtransaction.api.repositories.LogTransactionRepository;
-import br.com.logtransaction.api.services.LogTransactionService;
+import br.com.logtransaction.api.services.TopExpensesByBrandService;
 import br.com.logtransaction.api.services.exceptions.BadRequestException;
+import br.com.logtransaction.api.services.LogTransactionService;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 
 
 @Service
@@ -21,7 +19,7 @@ public class LogTransactionServiceImpl implements LogTransactionService {
     private LogTransactionRepository logTransactionRepository;
 
     @Autowired
-    private ClientService clientService;
+    private TopExpensesByBrandService clientService;
 
     @Override
     public LogTransaction save(LogTransaction logTransaction) {

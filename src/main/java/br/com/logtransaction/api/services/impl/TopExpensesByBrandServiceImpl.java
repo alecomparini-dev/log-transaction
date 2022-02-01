@@ -2,8 +2,8 @@ package br.com.logtransaction.api.services.impl;
 import static java.util.stream.Collectors.groupingBy;
 import br.com.logtransaction.api.enums.Brand;
 import br.com.logtransaction.api.models.TopExpensesByBrand;
-import br.com.logtransaction.api.repositories.ClientRepository;
-import br.com.logtransaction.api.services.ClientService;
+import br.com.logtransaction.api.repositories.TopExpensesByBrandRepository;
+import br.com.logtransaction.api.services.TopExpensesByBrandService;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -14,10 +14,10 @@ import org.springframework.stereotype.Service;
 
 
 @Service
-public class ClientServiceImpl implements ClientService {
+public class TopExpensesByBrandServiceImpl implements TopExpensesByBrandService {
 
     @Autowired
-    private ClientRepository clienteRepository;
+    private TopExpensesByBrandRepository clienteRepository;
 
     @Override
     public List<TopExpensesByBrand> getTopExpesesByBrand(LocalDateTime startDate, LocalDateTime limitDate) {

@@ -1,9 +1,8 @@
 package br.com.logtransaction.api.controllers;
-
 import br.com.logtransaction.api.controllers.mappers.TopExpensesByBrandMapper;
 import br.com.logtransaction.api.controllers.responses.TopExpensesByBrandResponse;
 import br.com.logtransaction.api.models.TopExpensesByBrand;
-import br.com.logtransaction.api.services.ClientService;
+import br.com.logtransaction.api.services.TopExpensesByBrandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,10 +12,10 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/client")
-public class ClientController {
+public class TopExpensesByBrandController {
 
     @Autowired
-    private ClientService clientService;
+    private TopExpensesByBrandService clientService;
 
     @GetMapping
     public List<TopExpensesByBrandResponse> getClientExpenses() {
