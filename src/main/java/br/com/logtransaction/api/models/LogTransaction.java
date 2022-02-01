@@ -7,22 +7,17 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.PositiveOrZero;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.data.mongodb.core.index.CompoundIndex;
-import org.springframework.data.mongodb.core.index.CompoundIndexes;
-import org.springframework.data.mongodb.core.index.IndexDirection;
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.annotation.Id;
 import lombok.Data;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 
 @Data
-@Document
-@CompoundIndexes({ @CompoundIndex(name = "brand_client", def = "{'brand' : 1, 'client': 1}") })
+@Document(collection = "logTransaction")
 public class LogTransaction implements Serializable{
 
     private static final long serialVersionUID = -7156526077883281623L;
 
-    @Id
+    @MongoId
     private String Id;
 
     @NotNull(message = "Field brand is required")
