@@ -20,7 +20,7 @@ public class ClientController {
 
     @GetMapping
     public List<TopExpensesByBrandResponse> getClientExpenses() {
-        List<TopExpensesByBrand> topExpensesByBrands = clientService.getTopExpesesByBrand(LocalDateTime.now().minusMinutes(5), LocalDateTime.now());
+        List<TopExpensesByBrand> topExpensesByBrands = clientService.getTopExpesesByBrand(LocalDateTime.now().minusMinutes(6000), LocalDateTime.now());
         return topExpensesByBrands.stream().map(TopExpensesByBrandMapper.INSTANCE::topExpensesToResponse).collect(Collectors.toList());
     }
 }

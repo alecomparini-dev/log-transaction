@@ -32,22 +32,15 @@ public class LogTransactionServiceImpl implements LogTransactionService {
 
     private LogTransaction validateRequest(LogTransaction logTransaction) {
         List<String> errors = new ArrayList<>();
-        validateBrand(logTransaction, errors);
         validateClient(logTransaction, errors);
         if(!errors.isEmpty())
             throw new BadRequestException(errors);
         return logTransaction;
     }
 
-    private void validateBrand(LogTransaction logTransaction, List<String> errors) {
-        if( !logTransaction.getClient().toLowerCase().startsWith("client") )
-            errors.add("Field 'client' must start with Client");
-    }
-
     private void validateClient(LogTransaction logTransaction, List<String> errors) {
-        if(!Arrays.stream(Brand.values()).anyMatch(
-            e -> e.name().equalsIgnoreCase(logTransaction.getBrand())))
-           errors.add("Field 'brand' not valid. Allowed values: " + Brand.getAllowedValues());
+        if( !logTransaction.getClient().toLowerCase().startsWith("client") )
+            errors.add("Field client must start with Client");
     }
     
 }

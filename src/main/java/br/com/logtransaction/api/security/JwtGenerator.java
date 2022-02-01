@@ -23,7 +23,7 @@ public class JwtGenerator {
         JWTCreator.Builder jwtBuilder = JWT.create().withSubject(subject);
 
         return jwtBuilder
-                .withNotBefore(new Date())                           // JWT only valid when after now
+                .withNotBefore(new Date())                  // JWT only valid when after now
                 .withExpiresAt(this.expirationDate(100000)) // JWT only valid when before expiration
                 .sign(Algorithm.RSA256(publicKey, privateKey));
     }

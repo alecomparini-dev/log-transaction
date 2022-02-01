@@ -4,5 +4,5 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public interface ClientService {
-    public List<TopExpensesByBrand>  getTopExpesesByBrand(LocalDateTime startDate, LocalDateTime limitDate);
+    public List<TopExpensesByBrand> getTopExpesesByBrand(LocalDateTime startDate, LocalDateTime limitDate);
 }
