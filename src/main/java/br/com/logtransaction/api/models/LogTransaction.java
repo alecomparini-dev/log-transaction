@@ -7,8 +7,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.PositiveOrZero;
 import com.fasterxml.jackson.annotation.JsonFormat;
-
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.MongoId;
@@ -24,12 +22,10 @@ public class LogTransaction implements Serializable{
     private String Id;
 
     @NotNull(message = "Field brand is required")
-    // @Indexed
     private Brand brand;
 
     @NotNull(message = "Field client is required")
     @NotEmpty(message = "Field client is not empty")
-    // @Indexed
     private String client;
 
     @NotNull(message = "Field amount is required")

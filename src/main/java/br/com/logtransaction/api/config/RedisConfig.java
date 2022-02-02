@@ -8,6 +8,7 @@ import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.core.RedisTemplate;
 
 import br.com.logtransaction.api.models.TopExpensesByBrand;
+import org.springframework.data.redis.serializer.GenericToStringSerializer;
 
 @Configuration
 @EnableConfigurationProperties(RedisProperties.class)
@@ -16,11 +17,11 @@ public class RedisConfig {
     @Bean
     JedisConnectionFactory jedisConnectionFactory() {
         RedisStandaloneConfiguration redisStandaloneConfiguration =
-                new RedisStandaloneConfiguration("localhost", 6379);
-        redisStandaloneConfiguration.setDatabase(0);
-        redisStandaloneConfiguration.setPassword("redis");
+                new RedisStandaloneConfiguration("localhost", 6379); //TODO: Add properties
+        redisStandaloneConfiguration.setDatabase(0); //TODO: Add properties
+        redisStandaloneConfiguration.setPassword("redis"); //TODO: Add properties
         JedisConnectionFactory jedisConnectionFactory = new JedisConnectionFactory(redisStandaloneConfiguration);
-        jedisConnectionFactory.setUseSsl(false);
+        // jedisConnectionFactory.setUseSsl(false);
         return jedisConnectionFactory;
     }
 
@@ -28,10 +29,9 @@ public class RedisConfig {
     public RedisTemplate<String, TopExpensesByBrand> redisTemplate() {
         RedisTemplate<String, TopExpensesByBrand> template = new RedisTemplate<>();
         template.setConnectionFactory(jedisConnectionFactory());
+//        template.setValueSerializer(new GenericToStringSerializer<TopExpensesByBrand>(TopExpensesByBrand.class));
         return template;
     }
-
-
 
 
 
