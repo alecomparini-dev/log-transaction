@@ -11,6 +11,9 @@ import java.time.LocalDateTime;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.redis.cache.RedisCacheConfiguration;
+import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.stereotype.Service;
 
 
@@ -25,13 +28,13 @@ public class TopExpensesByBrandServiceImpl implements TopExpensesByBrandService 
 
     @Override
     public List<TopExpensesByBrand> getTopExpesesByBrand(LocalDateTime startTime, LocalDateTime endTime) {
-
         List<TopExpensesByBrand> topExpensesByBrands = topExpensesCachedRepository.getExpensesByBrandCached();
         if (topExpensesByBrands.isEmpty()) {
-            topExpensesByBrands = getTopExpenses(topExpensesRepository.getTopExpesesByBrand(startTime, endTime));
+            topExpensesByBrands = groupTopExpensesByBrand(topExpensesRepository.getExpesesByTime(startTime, endTime));
+//            topExpensesByBrands = topExpensesRepository.getExpesesByTime(startTime, endTime);
             saveTopExpensesCached(topExpensesByBrands);
         }
-        return topExpensesByBrands;
+       return topExpensesByBrands;
     }
 
     //TODO: Melhorar para salvar tudo de uma única vez
@@ -42,7 +45,7 @@ public class TopExpensesByBrandServiceImpl implements TopExpensesByBrandService 
             });
     }
 
-    private List<TopExpensesByBrand> getTopExpenses(List<TopExpensesByBrand> listTopExpenses) {
+    private List<TopExpensesByBrand> groupTopExpensesByBrand(List<TopExpensesByBrand> listTopExpenses) {
         List<TopExpensesByBrand> topExpenses = new ArrayList<>();
         listTopExpenses.stream().collect(groupingBy(TopExpensesByBrand::getBrand))
                 .entrySet()

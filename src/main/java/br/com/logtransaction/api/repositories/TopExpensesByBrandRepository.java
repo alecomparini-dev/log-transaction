@@ -7,11 +7,20 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 
 public interface TopExpensesByBrandRepository extends MongoRepository<TopExpensesByBrand, String> {
+//   @Aggregation(pipeline = {
+//      "{ $match: { transactionDate: { $gte:?0, $lte:?1 }}}",
+//      "{ $project: { brand:'$brand', client:'$client', amount: { $convert: { input:'$amount', to:'decimal' }}}}",
+//      "{ $group: { _id: { brand:'$brand', client:'$client'}, amount: { $sum:'$amount' }}}",
+//      "{ $project: { brand:'$_id.brand', client:'$_id.client', amount:'$amount' }}",
+//   })
    @Aggregation(pipeline = {
-      "{ $match: { transactionDate: { $gte:?0, $lte:?1 }}}",
-      "{ $project: { brand:'$brand', client:'$client', amount: { $convert: { input:'$amount', to:'decimal' }}}}",
-      "{ $group: { _id: { brand:'$brand', client:'$client'}, amount: { $sum:'$amount' }}}",
-      "{ $project: { brand:'$_id.brand', client:'$_id.client', amount:'$amount' }}",
+        "{ $match: { transactionDate: { $gte:?0, $lte:?1 }}}",
+        "{ $project: { brand:'$brand', client:'$client', amount: { $convert: { input:'$amount', to:'decimal' }}}}",
+        "{ $group: { _id: { brand:'$brand', client:'$client'}, amount: { $sum:'$amount' }}}",
+        "{ $project: { brand:'$_id.brand', client:'$_id.client', amount:'$amount' }}",
+        "{ $group: { _id: {brand: '$brand'},amount: {$max: '$amount'},items: {$push: {amount: '$amount',client: '$client'}} }}",
+        "{ $project: { brand: '$_id.brand',client: '$_id.items.client',amount: '$amount',items: {$max: '$items'}} }",
+        "{ $project: {brand: '$brand',amount: '$amount',client: '$items.client'}}",
    })
-   List<TopExpensesByBrand> getTopExpesesByBrand(LocalDateTime startTime, LocalDateTime endTime);
+   List<TopExpensesByBrand> getExpesesByTime(LocalDateTime startTime, LocalDateTime endTime);
 }
