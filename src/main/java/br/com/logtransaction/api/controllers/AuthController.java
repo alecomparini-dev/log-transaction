@@ -1,5 +1,4 @@
 package br.com.logtransaction.api.controllers;
-
 import br.com.logtransaction.api.controllers.requests.AuthRequest;
 import br.com.logtransaction.api.security.JwtGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
-
 import java.util.HashMap;
 import java.util.Map;
 

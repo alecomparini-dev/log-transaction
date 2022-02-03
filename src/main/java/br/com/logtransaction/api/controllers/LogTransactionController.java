@@ -24,12 +24,10 @@ public class LogTransactionController {
     @PostMapping
     @Secured("USER")
     public ResponseEntity<LogTransaction> save(@Valid @RequestBody LogTransaction logTransaction, BindingResult result) {
-        
-        if (result.hasErrors()) 
+        if (result.hasErrors())
 			throw new BadRequestException(result);
             
         return ResponseEntity.ok(this.logTransactionService.save(logTransaction));
-
     }
     
 }

@@ -1,5 +1,4 @@
 package br.com.logtransaction.api.services.impl;
-
 import br.com.logtransaction.api.models.LogTransaction;
 import br.com.logtransaction.api.repositories.LogTransactionRepository;
 import br.com.logtransaction.api.services.LogTransactionService;
@@ -42,5 +41,5 @@ public class LogTransactionServiceImpl implements LogTransactionService {
         if( !logTransaction.getClient().toLowerCase().startsWith("client") )
             errors.add("Field client must start with Client");
     }
-    
+
 }
