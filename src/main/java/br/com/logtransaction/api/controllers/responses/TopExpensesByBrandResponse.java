@@ -1,4 +1,5 @@
 package br.com.logtransaction.api.controllers.responses;
+
 import lombok.Data;
 import java.math.BigDecimal;
 

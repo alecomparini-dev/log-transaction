@@ -1,10 +1,11 @@
 package br.com.logtransaction.api.models;
+
+import br.com.logtransaction.api.enums.Brand;
 import lombok.Data;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
-import org.springframework.data.mongodb.core.mapping.Document;
-import br.com.logtransaction.api.enums.Brand;
-import org.springframework.data.redis.core.RedisHash;
 
 @Data
 @Document( collection = "logTransaction")

@@ -1,16 +1,18 @@
 package br.com.logtransaction.api.models;
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
+
+import br.com.logtransaction.api.enums.Brand;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Data;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.MongoId;
+
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.PositiveOrZero;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.data.mongodb.core.mapping.Document;
-import lombok.Data;
-import org.springframework.data.mongodb.core.mapping.MongoId;
-import br.com.logtransaction.api.enums.Brand;
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Data
 @Document(collection = "logTransaction")
