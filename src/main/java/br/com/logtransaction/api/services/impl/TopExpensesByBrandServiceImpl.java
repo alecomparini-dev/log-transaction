@@ -25,23 +25,16 @@ public class TopExpensesByBrandServiceImpl implements TopExpensesByBrandService 
 
     @Override
     public List<TopExpensesByBrand> getTopExpesesByBrand(LocalDateTime startTime, LocalDateTime endTime) {
-        List<TopExpensesByBrand> topExpensesByBrands = new ArrayList<>();
 
-        Map<String, TopExpensesByBrand> topExpensesCached = getTopExpensesCached();
-        if (topExpensesCached.isEmpty()) {
+        List<TopExpensesByBrand> topExpensesByBrands = topExpensesCachedRepository.getExpensesByBrandCached();
+        if (topExpensesByBrands.isEmpty()) {
             topExpensesByBrands = getTopExpenses(topExpensesRepository.getTopExpesesByBrand(startTime, endTime));
             saveTopExpensesCached(topExpensesByBrands);
         }
-        topExpensesByBrands = topExpensesCached.values().stream().collect(Collectors.toList());
-
         return topExpensesByBrands;
     }
 
-    private Map<String, TopExpensesByBrand> getTopExpensesCached() {
-        Map<String, TopExpensesByBrand> topExpensesByBrand = topExpensesCachedRepository.getExpensesByBrandCached();
-        return topExpensesByBrand;
-    }
-
+    //TODO: Melhorar para salvar tudo de uma única vez
     private void saveTopExpensesCached(List<TopExpensesByBrand> topExpensesByBrands) {
         topExpensesByBrands.stream()
             .forEach( topExpenses -> {
@@ -49,21 +42,19 @@ public class TopExpensesByBrandServiceImpl implements TopExpensesByBrandService 
             });
     }
 
-
     private List<TopExpensesByBrand> getTopExpenses(List<TopExpensesByBrand> listTopExpenses) {
-        Map<Brand,List<TopExpensesByBrand>> mapTopExpenses = listTopExpenses.stream()
-            .collect(groupingBy(TopExpensesByBrand::getBrand)
-        );
-        
         List<TopExpensesByBrand> topExpenses = new ArrayList<>();
-        mapTopExpenses.entrySet()
-            .stream()
-            .forEach( entry -> {
-                topExpenses.add(entry.getValue().stream()
-                .max(Comparator.comparing(TopExpensesByBrand::getAmount))
-                .orElse(null));
-            });
-        
+        listTopExpenses.stream().collect(groupingBy(TopExpensesByBrand::getBrand))
+                .entrySet()
+                .stream()
+                .forEach(entry -> {
+                    topExpenses.add(
+                        entry.getValue()
+                            .stream()
+                            .max(Comparator.comparing(TopExpensesByBrand::getAmount))
+                            .orElse(null));
+                });
+
         return topExpenses;
     }
 

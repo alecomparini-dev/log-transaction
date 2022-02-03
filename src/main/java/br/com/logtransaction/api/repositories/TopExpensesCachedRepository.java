@@ -1,10 +1,8 @@
 package br.com.logtransaction.api.repositories;
-import java.util.List;
-import java.util.Map;
 import br.com.logtransaction.api.models.TopExpensesByBrand;
+import java.util.List;
 
 public interface TopExpensesCachedRepository{
-    
-    public Map<String, TopExpensesByBrand> getExpensesByBrandCached();
+    public List<TopExpensesByBrand> getExpensesByBrandCached();
     public void save(TopExpensesByBrand topExpensesByBrand);
 }
