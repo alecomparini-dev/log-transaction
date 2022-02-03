@@ -1,14 +1,16 @@
 package br.com.logtransaction.api.resources;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
+
+import br.com.logtransaction.api.services.exceptions.BadRequestException;
+import br.com.logtransaction.api.services.exceptions.CustomerNameException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import br.com.logtransaction.api.services.exceptions.BadRequestException;
-import br.com.logtransaction.api.services.exceptions.CustomerNameException;
+
+import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @ControllerAdvice
@@ -43,5 +45,6 @@ public class DefaulErrorExceptionHandler {
                    
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(defaultError);
     }
+
 
 }

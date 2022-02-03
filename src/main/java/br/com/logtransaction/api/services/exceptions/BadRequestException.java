@@ -1,10 +1,11 @@
 package br.com.logtransaction.api.services.exceptions;
-import java.util.ArrayList;
-import java.util.List;
-import org.springframework.validation.BindingResult;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import org.springframework.validation.BindingResult;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @AllArgsConstructor
