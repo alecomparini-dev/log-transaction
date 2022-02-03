@@ -15,14 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/log")
 public class LogTransactionController {
     
     @Autowired
     private LogTransactionService logTransactionService;
 
-    @PostMapping
-    @Secured("USER")
+    @PostMapping("/log")
     public ResponseEntity<LogTransaction> save(@Valid @RequestBody LogTransaction logTransaction, BindingResult result) {
         
         if (result.hasErrors()) 
