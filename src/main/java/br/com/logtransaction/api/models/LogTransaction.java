@@ -2,6 +2,7 @@ package br.com.logtransaction.api.models;
 
 import br.com.logtransaction.api.enums.Brand;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
@@ -14,6 +15,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+@Builder
 @Data
 @Document(collection = "logTransaction")
 public class LogTransaction implements Serializable{
