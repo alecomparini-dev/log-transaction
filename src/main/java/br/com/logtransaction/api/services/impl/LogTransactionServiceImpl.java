@@ -20,9 +20,6 @@ public class LogTransactionServiceImpl implements LogTransactionService {
     @Autowired
     private LogTransactionRepository logTransactionRepository;
 
-    @Autowired
-    private TopExpensesByBrandService clientService;
-
     @Override
     public LogTransaction save(LogTransaction logTransaction) {
         logTransaction.setCreateAt(LocalDateTime.now());
