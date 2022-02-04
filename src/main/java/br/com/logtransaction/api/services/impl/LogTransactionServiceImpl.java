@@ -3,7 +3,6 @@ package br.com.logtransaction.api.services.impl;
 import br.com.logtransaction.api.models.LogTransaction;
 import br.com.logtransaction.api.repositories.LogTransactionRepository;
 import br.com.logtransaction.api.services.LogTransactionService;
-import br.com.logtransaction.api.services.TopExpensesByBrandService;
 import br.com.logtransaction.api.services.exceptions.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,15 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
 @Service
 public class LogTransactionServiceImpl implements LogTransactionService {
 
     @Autowired
     private LogTransactionRepository logTransactionRepository;
-
-    @Autowired
-    private TopExpensesByBrandService clientService;
 
     @Override
     public LogTransaction save(LogTransaction logTransaction) {
