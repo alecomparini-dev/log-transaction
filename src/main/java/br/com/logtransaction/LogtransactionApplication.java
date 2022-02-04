@@ -3,9 +3,11 @@ package br.com.logtransaction;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 @SpringBootApplication
-@ComponentScan("br.com.logtransaction")
+@EnableMongoRepositories
+@ComponentScan("br.com.logtransaction.api")
 public class LogtransactionApplication {
 
 	public static void main(String[] args) {
