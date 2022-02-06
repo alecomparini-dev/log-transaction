@@ -25,6 +25,7 @@ public class LogTransaction implements Serializable{
     @MongoId
     private String Id;
 
+    //TODO: Incluir as validações no service e criar o testes
     @NotNull(message = "Field brand is required")
     private Brand brand;
 

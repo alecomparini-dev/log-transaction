@@ -8,12 +8,12 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
@@ -32,10 +32,9 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 public class LogTransactionControllerTest {
 
     @Autowired
-    private MockMvc mockMvc;
-
-    @Autowired
     private WebApplicationContext webApplicationContext;
+
+    private MockMvc mockMvc;
 
     @MockBean
     private LogTransactionService logTransactionService;
@@ -45,9 +44,9 @@ public class LogTransactionControllerTest {
         this.mockMvc = webAppContextSetup(webApplicationContext).build();
     }
 
+    //TODO: estudar triple A
     @Test
-    public void should_CreateAccount_When_ValidRequest() throws Exception {
-
+    public void should_SaveLogTransaction_When_ValidRequest() throws Exception {
         when(logTransactionService.save(any(LogTransaction.class)))
                 .thenReturn(LogTransaction.builder()
                         .Id("61f96fd8df7507221539a736")
@@ -65,7 +64,7 @@ public class LogTransactionControllerTest {
                                 "    \"amount\": 12654.55,\n" +
                                 "    \"transactionDate\": \"2022-01-29T18:14:18.129000\" \n" +
                                 "}")
-                        .accept(MediaType.APPLICATION_JSON))
+                .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is(200))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
 //                .andExpect(header().string("Location", "/api/account/12345"))

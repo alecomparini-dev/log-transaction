@@ -25,7 +25,7 @@ public class RedisConfig extends CachingConfigurerSupport {
     @Bean
     JedisConnectionFactory jedisConnectionFactory() {
         RedisStandaloneConfiguration redisStandaloneConfiguration =
-                new RedisStandaloneConfiguration("localhost", 6379); //TODO: Add properties
+                new RedisStandaloneConfiguration("redis", 6379); //TODO: Add properties
         redisStandaloneConfiguration.setDatabase(0); //TODO: Add properties
         redisStandaloneConfiguration.setPassword("redis"); //TODO: Add properties
         JedisConnectionFactory jedisConnectionFactory = new JedisConnectionFactory(redisStandaloneConfiguration);
@@ -38,25 +38,5 @@ public class RedisConfig extends CachingConfigurerSupport {
         template.setConnectionFactory(jedisConnectionFactory());
         return template;
     }
-
-
-
-    private RedisCacheConfiguration createCacheConfiguration(long timeoutInSeconds) {
-        return RedisCacheConfiguration.defaultCacheConfig()
-                .entryTtl(Duration.ofSeconds(timeoutInSeconds));
-    }
-
-    @Bean
-    public CacheManager cacheManager(JedisConnectionFactory redisConnectionFactory) {
-        Map<String, RedisCacheConfiguration> cacheConfigurations = new HashMap<>();
-        cacheConfigurations.put("topExpenses",createCacheConfiguration(10));
-
-        return RedisCacheManager
-                .builder(redisConnectionFactory)
-                .cacheDefaults(createCacheConfiguration(10))
-                .withInitialCacheConfigurations(cacheConfigurations).build();
-    }
-
-
 
 }

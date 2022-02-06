@@ -27,6 +27,7 @@ public class LogTransactionServiceImpl implements LogTransactionService {
         return logTransaction;
     }
 
+    //TODO: Validação so retornar true ou false, não retornar objeto.
     private LogTransaction validateRequest(LogTransaction logTransaction) {
         List<String> errors = new ArrayList<>();
         validateClient(logTransaction, errors);
