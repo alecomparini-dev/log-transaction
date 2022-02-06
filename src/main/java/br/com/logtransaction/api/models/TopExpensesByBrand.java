@@ -1,12 +1,14 @@
 package br.com.logtransaction.api.models;
 
 import br.com.logtransaction.api.enums.Brand;
+import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+@Builder
 @Data
 @Document( collection = "logTransaction")
 public class TopExpensesByBrand implements Serializable{

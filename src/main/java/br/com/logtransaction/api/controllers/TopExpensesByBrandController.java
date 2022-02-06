@@ -24,7 +24,7 @@ public class TopExpensesByBrandController {
 
     @GetMapping("/client")
     public List<TopExpensesByBrandResponse> getClientExpenses() {
-        List<TopExpensesByBrand> topExpensesByBrands = clientService.getTopExpesesByBrand(LocalDateTime.now().minusMinutes(time), LocalDateTime.now());
+        List<TopExpensesByBrand> topExpensesByBrands = clientService.getTopExpensesByBrand(LocalDateTime.now().minusMinutes(time), LocalDateTime.now());
         return topExpensesByBrands.stream().map(TopExpensesByBrandMapper.INSTANCE::topExpensesToResponse).collect(Collectors.toList());
     }
 }
