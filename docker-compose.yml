@@ -1,22 +1,22 @@
 version: '3.9'
 
 services:
-  serasa:
-    image: serasa
-    container_name: serasa
-    restart: always
-    environment:
-      - SPRING_DATA_MONGODB_HOST=mongo
-      - SPRING_REDIS_HOST=redis
-    ports:
-      - '8080:8080'
-    depends_on:
-      mongo:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-    networks:
-      - rede-network
+#  serasa:
+#    image: serasa
+#    container_name: serasa
+#    restart: always
+#    environment:
+#      - SPRING_DATA_MONGODB_HOST=mongo
+#      - SPRING_REDIS_HOST=redis
+#    ports:
+#      - '8080:8080'
+#    depends_on:
+#      mongo:
+#        condition: service_healthy
+#      redis:
+#        condition: service_healthy
+#    networks:
+#      - rede-network
 
   mongo:
     image: mongo
@@ -31,7 +31,6 @@ services:
         - mongo
         - --eval
         - "db.adminCommand('ping')"
-
     ports:
       - '27017:27017'
     volumes:
