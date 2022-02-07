@@ -1,0 +1,108 @@
+{
+	"info": {
+		"_postman_id": "3ee32736-e7b3-478c-9f10-ee80ee66ff2a",
+		"name": "log-transaction",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user\": \"user\",\r\n    \"password\": \"bWluaGFfc2VuaGFfbXVpdG9fc2VjcmV0YV9xdWVfbmluZ3VlbV9wb2RlX3NhYmVy\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/login",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/log",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwibmJmIjoxNjQ0MTYxNzA0LCJleHAiOjE2NDQyNjE3MDR9.lf5PtI_YII3OfeEht7d6mihUutPEOYLyf8E7shAgdasf6NKDJ846aCy0ZrX3MHn9mNQaHz624D9PyGheMP_zSxU4ozP80YVulHldX74BjcfJLV-qOT4fOpqh0uAc39JEwxsNxQv09c7FuX6OLCfUG8hNJ1XQzuRQtFYckO7KYQls_zflWlCfGbxK8rlcVPlF86c8HCUPZU8rm6pN2gG4TR_2gwuurC75Wr13x023FoaBFPgYFqOLbf32jM3D3ipoTm36DsgK04eR5OOf6p0UUihpd36eLAtX4XEAhH986rI7vDy5J-nBKBD6xOroUv7W636bXGFaXITcIOvHe6DZ9g",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"brand\": \"ELO\",\r\n    \"client\": \"client199\",\r\n    \"amount\": 1246464654654.56,\r\n    \"transactionDate\": \"2022-01-29T18:14:18.129000\" \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/log",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"log"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/client",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwibmJmIjoxNjQzODk0OTg4LCJleHAiOjE2NDM5OTQ5ODh9.Ewursix7qA5NYa-RM9bFuqVn5_VWNn_8PdHxquSXqoEC_pbcxyT2HzJQOA8aHrSWpbWsMEqHG5RGfPrpqOdbIyMrA5MApkP6AIDed-hjdcoHWD35PPIZTgjxl_ksoPH1S3eg2ixC2mCump8c5bNA5e89KrPu0ubIrl20ucL-Lkg7OmTvzGeKn5vTufs4mcfjGzCLNJ9yHeeqkr1xPddC_kqRxHJO-g0K9IUTe4IVHlA8vaF7-xvGS7GNiVUCrob5fLJMRhj0fbFIsdn7Ms3bGlNGGV-I-hMoqgOybJ_TKkr8A0LhgVLRzQQDH4ForXzbnslcBG1YzlSBSUV6OhYvtQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/client",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"client"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

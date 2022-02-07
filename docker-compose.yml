@@ -1,14 +1,14 @@
 version: '3.9'
 
 services:
-  serasa-teste:
-    image: serasa-teste
-    container_name: serasa-teste
+  log-transaction:
+    image: log-transaction
+    container_name: log-transaction
     restart: always
     environment:
       - SPRING_DATA_MONGODB_HOST=mongo
       - SPRING_REDIS_HOST=redis
-      - API_CACHE_REDIS_EXPIRATE=30
+      - API_CACHE_REDIS_EXPIRATE=60
       - API_PARAMETER_TIME_GET-TOP-EXPENSES=600000
       - API_SECURITY_JWT_EXPIRATE-TOKEN=42
       - SERVER_PORT=8080
@@ -17,8 +17,6 @@ services:
     depends_on:
       mongo:
         condition: service_healthy
-      # redis:
-      #   condition: service_healthy
     networks:
       - rede-network
 
@@ -49,11 +47,6 @@ services:
     command: redis-server --requirepass redis
     ports:
       - "6379:6379"
-    # healthcheck:
-    #   test:
-    #     - CMD
-    #     - echo
-    #     - "1"
     networks:
       - rede-network
 
