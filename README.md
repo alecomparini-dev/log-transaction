@@ -66,7 +66,7 @@ $ mvn spring-boot:run
 <http://localhost:8081>
 ```
 
-### Other configuration file
+### Other configuration
 - --
 ###### open file: _docker-compose.yml_
 - JWT token expiration time: `API_SECURITY_JWT_EXPIRATE-TOKEN=<seconds>`
