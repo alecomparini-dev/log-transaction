@@ -86,5 +86,13 @@ $ mvn spring-boot:run
 
 > Endpoints: 
 >- _**/login:**_ `authentication`
->- _**/log:**_ `send transaction logs`
->- _**/client:**_ `customers who most transacted in the last 30 min, by credit card company`
+>- *_**/log:**_ `send transaction logs`
+>- *_**/client:**_ `customers who most transacted in the last 30 min, by credit card company`
+
+OBS:
+`*=Authentication required`
+
+
+
+
+
