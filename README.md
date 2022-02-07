@@ -14,11 +14,8 @@ You will need to have the following tools installed on your machine:
 - [Docker](https://docs.docker.com/desktop/windows/install/)
 - [Maven](https://maven.apache.org/guides/getting-started/windows-prerequisites.html#maven-on-windows)
 
-  - Configurar variável de ambiente: `PATH="C:\<path.maven>\bin"`   
+  - Configure environment variable: `PATH="C:\<path.maven>\bin"`   
   
-Além disto é bom ter um editor para trabalhar com o código como [VSCode](https://code.visualstudio.com/)
-ou [IntelliJ - Community](https://www.jetbrains.com/pt-br/idea/download/#section=windows)
-
 ### Building project
 - --
 ```sh
