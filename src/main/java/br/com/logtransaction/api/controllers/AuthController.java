@@ -31,7 +31,12 @@ public class AuthController {
     @RequestMapping(path = "/login", method = RequestMethod.POST)
     public Map<String,String> authorize(@RequestBody AuthRequest authRequest ) {
 
-        UserDetails user = this.userDetailsService.loadUserByUsername(authRequest.getUser());
+        UserDetails user = null;
+        try {
+            user = this.userDetailsService.loadUserByUsername(authRequest.getUser());
+        }catch (Exception e ){
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
+        }
 
         if (!passwordEncoder.matches(authRequest.getPassword(), user.getPassword()))
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
