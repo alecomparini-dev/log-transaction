@@ -1,13 +1,40 @@
-version: '3.8'
+version: '3.9'
 
 services:
+  serasa-teste:
+    image: serasa-teste
+    container_name: serasa-teste
+    restart: always
+    environment:
+      - SPRING_DATA_MONGODB_HOST=mongo
+      - SPRING_REDIS_HOST=redis
+      - API_CACHE_REDIS_EXPIRATE=30
+      - API_PARAMETER_TIME_GET-TOP-EXPENSES=600000
+      - API_SECURITY_JWT_EXPIRATE-TOKEN=42
+      - SERVER_PORT=8080
+    ports:
+      - '8080:8080'
+    depends_on:
+      mongo:
+        condition: service_healthy
+      # redis:
+      #   condition: service_healthy
+    networks:
+      - rede-network
+
   mongo:
     image: mongo
     container_name: mongo
     restart: always
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=root
-      - MONGO_INITDB_ROOT_PASSWORD=mongdb
+        - MONGO_INITDB_ROOT_USERNAME=root
+        - MONGO_INITDB_ROOT_PASSWORD=mongdb
+    healthcheck:
+      test:
+        - CMD
+        - mongo
+        - --eval
+        - "db.adminCommand('ping')"
     ports:
       - '27017:27017'
     volumes:
@@ -22,6 +49,11 @@ services:
     command: redis-server --requirepass redis
     ports:
       - "6379:6379"
+    # healthcheck:
+    #   test:
+    #     - CMD
+    #     - echo
+    #     - "1"
     networks:
       - rede-network
 

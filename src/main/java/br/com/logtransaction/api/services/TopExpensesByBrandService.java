@@ -6,5 +6,5 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public interface TopExpensesByBrandService {
-    public List<TopExpensesByBrand> getTopExpesesByBrand(LocalDateTime startDate, LocalDateTime limitDate);
+    public List<TopExpensesByBrand> getTopExpensesByBrand(LocalDateTime startDate, LocalDateTime limitDate);
 }

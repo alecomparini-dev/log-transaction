@@ -57,7 +57,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .password(password)
                 .build();
 
-        // TODO :: In future update to be a User table in database
         InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
         manager.createUser(user);
         return manager;

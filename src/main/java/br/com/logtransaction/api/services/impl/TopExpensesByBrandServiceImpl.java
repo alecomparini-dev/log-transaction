@@ -4,7 +4,6 @@ import br.com.logtransaction.api.models.TopExpensesByBrand;
 import br.com.logtransaction.api.repositories.TopExpensesByBrandRepository;
 import br.com.logtransaction.api.repositories.TopExpensesCachedRepository;
 import br.com.logtransaction.api.services.TopExpensesByBrandService;
-import org.apache.tomcat.jni.Time;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,11 +22,11 @@ public class TopExpensesByBrandServiceImpl implements TopExpensesByBrandService 
     private TopExpensesCachedRepository topExpensesCachedRepository ;
 
     @Override
-    public List<TopExpensesByBrand> getTopExpesesByBrand(LocalDateTime startTime, LocalDateTime endTime) {
+    public List<TopExpensesByBrand> getTopExpensesByBrand(LocalDateTime startTime, LocalDateTime endTime) {
         List<TopExpensesByBrand> topExpensesByBrands = topExpensesCachedRepository.getExpensesByBrandCached();
         if (topExpensesByBrands.isEmpty()) {
-            topExpensesByBrands = topExpensesRepository.getExpesesByTime(startTime, endTime);
-            CompletableFuture<Boolean> cf = CompletableFuture.completedFuture(topExpensesByBrands)
+            topExpensesByBrands = topExpensesRepository.getTopExpensesByBrand(startTime, endTime);
+            CompletableFuture.completedFuture(topExpensesByBrands)
                     .thenApplyAsync( topExpenses -> saveTopExpensesCached(topExpenses));
         }
        return topExpensesByBrands;

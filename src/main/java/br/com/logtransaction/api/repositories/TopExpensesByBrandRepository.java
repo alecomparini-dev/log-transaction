@@ -18,5 +18,5 @@ public interface TopExpensesByBrandRepository extends MongoRepository<TopExpense
         "{ $project: { brand: '$_id.brand',client: '$_id.items.client',amount: '$amount',items: {$max: '$items'}} }",
         "{ $project: {brand: '$brand',amount: '$amount',client: '$items.client'}}",
    })
-   List<TopExpensesByBrand> getExpesesByTime(LocalDateTime startTime, LocalDateTime endTime);
+   List<TopExpensesByBrand> getTopExpensesByBrand(LocalDateTime startTime, LocalDateTime endTime);
 }

@@ -1,5 +1,6 @@
 package br.com.logtransaction.api.enums;
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public enum Brand {
 
@@ -9,7 +10,7 @@ public enum Brand {
     AMERICANEXPRESS("americanexpress");
 
     private String description;
-    private String allowedValues = "" ;
+    private static String allowedValues = "" ;
 
     private Brand(String desc) {
         this.description = desc;
@@ -19,8 +20,14 @@ public enum Brand {
         return this.description;
     }
 
-    public String getAllowedValues() {
+    public static String getAllowedValues() {
         allowedValues = "";
+
+        String teste = Arrays.stream(Brand.values())
+                .map( e -> e.getDescription() ).collect(Collectors.joining(","));
+
+        System.out.println(teste);
+
         Arrays.stream(Brand.values()).forEach( e -> allowedValues += e.name().toString() + ", ");
         return String.format("[%s]",allowedValues.substring(0,allowedValues.length()-2));
     }
