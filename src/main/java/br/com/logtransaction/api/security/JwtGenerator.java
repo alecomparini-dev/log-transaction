@@ -3,6 +3,7 @@ package br.com.logtransaction.api.security;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTCreator;
 import com.auth0.jwt.algorithms.Algorithm;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.security.interfaces.RSAPrivateKey;
@@ -16,6 +17,9 @@ public class JwtGenerator {
     private final RSAPrivateKey privateKey;
     private final RSAPublicKey publicKey;
 
+    @Value("${api.security.jwt.expirate-token}")
+    private int expirateToken;
+
     public JwtGenerator(RSAPrivateKey privateKey, RSAPublicKey publicKey) {
         this.privateKey = privateKey;
         this.publicKey = publicKey;
@@ -25,8 +29,8 @@ public class JwtGenerator {
         JWTCreator.Builder jwtBuilder = JWT.create().withSubject(subject);
 
         return jwtBuilder
-                .withNotBefore(new Date())                  // JWT only valid when after now
-                .withExpiresAt(this.expirationDate(100000)) // JWT only valid when before expiration
+                .withNotBefore(new Date())
+                .withExpiresAt(this.expirationDate(expirateToken))
                 .sign(Algorithm.RSA256(publicKey, privateKey));
     }
 
