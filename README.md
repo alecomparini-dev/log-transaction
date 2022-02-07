@@ -1,12 +1,10 @@
 # Log-Transaction
-- --
 > Receive credit card transaction logs and expose customer's endpoint who most transacted in the last 30min, by credit card company.
 
 <img src="https://img.shields.io/badge/license-MIT-green"/>
 
 
 ## Development setup
-- --
 ### Prerequisites
 You will need to have the following tools installed on your machine:
 - [Git](https://git-scm.com)
@@ -72,11 +70,11 @@ $ mvn spring-boot:run
 - --
 ###### open file: _docker-compose.yml_
 - JWT token expiration time: `API_SECURITY_JWT_EXPIRATE-TOKEN=<seconds>`
-  - *`Default:`***`42`** 
+  - *`Default:`* **`42`** 
   
 
 - REDIS cache expiration time: `API_CACHE_REDIS_EXPIRATE=<seconds>`
-  - *`Default:`***`60`**
+  - *`Default:`* **`60`**
 
 > After changing run the following command: 
 > - `docker-compose up`
