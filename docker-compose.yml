@@ -36,7 +36,7 @@ services:
     ports:
       - '27017:27017'
     volumes:
-      - C:\mongodb:/data/db
+      - ~/volumes:/data/db
     networks:
       - rede-network
 
